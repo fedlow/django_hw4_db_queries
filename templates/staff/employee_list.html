@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Список сотрудников{% endblock %}
+{% block content %}
+    <h2>Все сотрудники</h2>
+    
+    {% for employee in employees %}
+        {% include 'staff/_employee_card.html' %}
+    {% endfor %}
+
+    <div class="pagination" style="margin-top: 20px;">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+        {% endif %}
+
+        <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+        {% endif %}
+    </div>
+{% endblock %}

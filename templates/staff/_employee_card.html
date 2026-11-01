@@ -1,0 +1,12 @@
+<div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; display: flex; align-items: center;">
+    {% if employee.first_image %}
+        <img src="{{ employee.first_image.image.url }}" alt="Фото" style="width: 100px; height: 100px; object-fit: cover; margin-right: 15px; border-radius: 5px;">
+    {% else %}
+        <div style="width: 100px; height: 100px; background: #eee; margin-right: 15px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">Нет фото</div>
+    {% endif %}
+    <div>
+        <h3><a href="{% url 'employee_detail' employee.pk %}">{{ employee.last_name }} {{ employee.first_name }}</a></h3>
+        <p><strong>Навыки:</strong> {{ employee.skills }}</p>
+        <p><strong>Стаж:</strong> {{ employee.tenure_days }} дн.</p>
+    </div>
+</div>

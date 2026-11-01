@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ employee.first_name }}{% endblock %}
+{% block content %}
+    <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+        {% if main_image %}
+            <img src="{{ main_image.image.url }}" alt="Заглавное фото" style="width: 300px; border-radius: 10px;">
+        {% endif %}
+        <div>
+            <h2>{{ employee.last_name }} {{ employee.first_name }}</h2>
+            <p><strong>Пол:</strong> {{ employee.get_gender_display }}</p>
+            <p><strong>Должность:</strong> {{ employee.get_role_display }}</p>
+            <p><strong>Номер стола:</strong> {{ employee.desk_number|default:"Не указан" }}</p>
+            <p><strong>Стаж:</strong> {{ employee.tenure_days }} дн.</p>
+            <p><strong>Навыки:</strong> {{ employee.skills }}</p>
+        </div>
+    </div>
+
+    <h3>Галерея (кроме заглавного фото)</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        {% for img in other_images %}
+            <img src="{{ img.image.url }}" alt="Фото" style="width: 150px; height: 150px; object-fit: cover;">
+        {% empty %}
+            <p>Других фотографий нет.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
